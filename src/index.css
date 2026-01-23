@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+
+@layer base {
+  body { @apply antialiased font-sans bg-primaryBg text-textPrimary; }
+  /* Custom scrollbar using allowed palette */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #111827; }
+  ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 10px; }
+}
+
+@layer components {
+  .container-px { @apply px-6 sm:px-8 lg:px-12; }
+  .section { @apply container-px max-w-6xl mx-auto py-20 sm:py-28; }
+  .card { @apply rounded-2xl bg-cardBg/100 border border-divider backdrop-blur-sm shadow-soft; }
+  .tag { @apply inline-flex items-center rounded-full border border-divider bg-secondaryBg/60 px-3 py-1 text-xs text-textSecondary; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-medium transition-all; }
+  .btn-primary { @apply btn bg-accent text-primaryBg hover:bg-accentHover; }
+  .btn-ghost { @apply btn border border-divider bg-secondaryBg/60 hover:bg-secondaryBg/80 text-textPrimary; }
+  .hairline { @apply pointer-events-none h-px w-full bg-divider; }
+}
+
+/* Subtle accent glow helper */
+.glow-accent { box-shadow: 0 0 0 1px rgba(59,130,246,0.15), 0 0 80px 8px rgba(59,130,246,0.15); }
+
+/* Grid + gradient background helpers respecting palette */
+.bg-hero { @apply bg-hero-gradient; }
+.bg-grid { @apply bg-grid-radial; }
