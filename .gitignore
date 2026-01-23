@@ -32,10 +32,3 @@ logs/
 .cache/
 .parcel-cache/
 .prettierignore
-
-# Assets
-profile.*
-*.jpg
-*.jpeg
-*.png
-*.gif
