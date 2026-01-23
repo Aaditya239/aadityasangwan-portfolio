@@ -311,6 +311,18 @@ export default function Hero() {
                 transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                 className="pointer-events-none absolute -inset-10 rounded-full border border-purple-500/15"
               />
+
+              {/* About description below circular image */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+                className="mt-8 text-center max-w-sm"
+              >
+                <p className="text-sm text-zinc-300 leading-relaxed">
+                  Full-stack developer building clean, intuitive digital experiences. Passionate about solving real problems with thoughtful code and intentional design.
+                </p>
+              </motion.div>
             </div>
           </motion.div>
         </div>
