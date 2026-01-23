@@ -9,7 +9,7 @@ import Contact from './sections/Contact'
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-night-950">
+    <div className="relative min-h-screen bg-primaryBg">
       {/* Ambient background gradients */}
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 bg-hero-gradient opacity-90" />
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 bg-grid-radial" />
@@ -26,8 +26,8 @@ export default function App() {
         </main>
       </AnimatePresence>
 
-      <footer className="section pt-8 text-center text-sm text-zinc-500/80">
-        © {new Date().getFullYear()} Aaditya Sangwan — Crafted with React, Tailwind & Framer Motion.
+      <footer className="section pt-8 text-center text-sm text-zinc-400">
+        Crafted with care by Aaditya Sangwan
       </footer>
     </div>
   )

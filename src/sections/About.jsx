@@ -1,14 +1,14 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import SectionHeading from '../components/SectionHeading'
-import profilePhoto from '../assets/profile.jpg'
 
 const aboutLines = [
-  "I'm a web developer focused on building clean, thoughtful, and reliable digital experiences.",
-  "I enjoy working across frontend and backend, turning ideas into practical products.",
-  "With a strong foundation in computer science, I value structure, clarity, and maintainable code.",
-  "I like building projects that solve real problems and make a meaningful impact.",
-  "Always learning, always improving, and open to new challenges.",
+  "I'm a full-stack web developer with a passion for building clean, intuitive, and performant digital experiences.",
+  "My approach is simple: understand the problem deeply, then craft thoughtful solutions that work beautifully.",
+  "I love the entire process—from design systems and component architecture to optimization and deployment.",
+  "I believe great code is readable code. I prioritize maintainability, clarity, and intentional design.",
+  "Beyond shipping features, I'm driven by solving real problems that make a meaningful difference.",
+  "I'm constantly learning, exploring new technologies, and pushing my limits as an engineer."
 ]
 
 export default function About() {
@@ -35,7 +35,7 @@ export default function About() {
         
       />
 
-      <div className="grid items-center gap-8 md:grid-cols-2">
+      <div className="mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,29 +58,6 @@ export default function About() {
               </motion.p>
             ))}
           </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
-          className="relative mx-auto w-full max-w-sm"
-        >
-          <div className="relative overflow-hidden rounded-2xl border border-divider/40 bg-gradient-to-b from-white/5 to-primaryBg/30 shadow-lg">
-            {/* Profile image with head-and-shoulders crop */}
-            <img 
-              src={profilePhoto} 
-              alt="Aaditya Sangwan profile photo" 
-              className="aspect-[3/4] w-full object-cover object-top"
-            />
-            
-            {/* Subtle dark overlay for blending */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primaryBg/5 to-primaryBg/25" />
-          </div>
-          
-          {/* Subtle glow accent */}
-          <div className="pointer-events-none absolute -inset-2 rounded-2xl opacity-30 blur-3xl" style={{ boxShadow: '0 0 60px 8px rgba(59,130,246,0.08)' }} />
         </motion.div>
       </div>
     </section>

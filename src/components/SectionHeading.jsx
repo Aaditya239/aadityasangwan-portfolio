@@ -18,7 +18,7 @@ export default function SectionHeading({ eyebrow, title, subtitle }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="font-display text-3xl leading-tight text-white sm:text-4xl md:text-5xl"
+        className="font-display text-3xl leading-tight text-white sm:text-4xl md:text-5xl drop-shadow-[0_0_25px_rgba(167,139,250,0.2)]"
       >
         {title}
       </motion.h2>

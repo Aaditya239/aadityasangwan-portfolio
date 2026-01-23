@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import profilePhoto from '../assets/profile.jpg'
 
 /*********************** Animated Space Background ************************/
 function rand(min, max) { return Math.random() * (max - min) + min }
@@ -148,24 +149,34 @@ const roles = [
 
 const name = 'Aaditya Sangwan'
 
+// Natural typing timing with micro-variations
+const getTypingDelay = (index) => {
+  // Longer pause between first name and last name (after "Aaditya")
+  if (index === 7) return 180 // Pause after first name
+  // Slight natural variation for different characters
+  if (index === 0) return 400 // Initial delay before typing starts
+  if ([4, 8, 14].includes(index)) return 140 // Slight pause at natural word boundaries
+  return 90 + Math.random() * 50 // Natural variation between 90-140ms
+}
+
 export default function Hero() {
   const [displayedName, setDisplayedName] = useState('')
   const [nameComplete, setNameComplete] = useState(false)
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0)
 
-  // Name typing animation
+  // Realistic name typing animation with natural timing
   useEffect(() => {
     if (displayedName.length < name.length) {
-      const delay = displayedName.length === 0 ? 400 : 120 // 400ms delay before starting, 120ms per letter
+      const delay = getTypingDelay(displayedName.length)
       const timer = setTimeout(() => {
         setDisplayedName(name.slice(0, displayedName.length + 1))
       }, delay)
       return () => clearTimeout(timer)
     } else if (displayedName.length === name.length && !nameComplete) {
-      // Add a small delay after typing completes before showing roles
+      // Subtle delay after typing completes before showing roles
       const timer = setTimeout(() => {
         setNameComplete(true)
-      }, 300)
+      }, 500)
       return () => clearTimeout(timer)
     }
   }, [displayedName, nameComplete])
@@ -176,7 +187,7 @@ export default function Hero() {
 
     const interval = setInterval(() => {
       setCurrentRoleIndex((prev) => (prev + 1) % roles.length)
-    }, 4000) // Change role every 4 seconds
+    }, 4500) // 4.5 second duration (0.5s transition + 4s display)
     return () => clearInterval(interval)
   }, [nameComplete])
 
@@ -187,51 +198,122 @@ export default function Hero() {
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-hero-gradient opacity-70" />
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-grid-radial opacity-[0.35]" />
 
-      <div className="relative mx-auto flex min-h-screen w-full items-center container-px">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-          className="w-full text-left md:max-w-2xl lg:max-w-3xl"
-        >
-          {/* Left-aligned: name, role, CTA */}
-          <div className="relative z-10">
-            {/* Typing animation for name */}
-            <h1 className="font-display text-left text-5xl leading-[1.1] tracking-[-0.02em] text-textPrimary sm:text-6xl md:text-7xl lg:text-8xl min-h-[1.1em]">
-              {displayedName}
-            </h1>
+      <div className="relative mx-auto flex min-h-screen w-full items-center justify-center container-px">
+        <div className="grid w-full items-center gap-8 lg:grid-cols-2 lg:gap-8">
+          {/* Left side: Text content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: 'easeOut' }}
+            className="flex flex-col justify-center text-center lg:text-left"
+          >
+            {/* Left-aligned: name, role, CTA */}
+            <div className="relative z-10">
+              {/* Typing animation for name - with text shadow and caret */}
+              <h1 className="font-display text-5xl leading-[1.15] tracking-[-0.02em] text-textPrimary sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl font-bold min-h-[1.15em] drop-shadow-[0_0_30px_rgba(167,139,250,0.35)]">
+                {displayedName}
+                {displayedName.length < name.length && (
+                  <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
+                    className="ml-1 text-purple-400"
+                    aria-hidden
+                  >
+                    |
+                  </motion.span>
+                )}
+              </h1>
 
-            {/* Looping role animation - starts after name completes */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={nameComplete ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.6, ease: 'easeInOut' }}
-              className="mt-6 min-h-12 sm:mt-8 sm:min-h-14 md:mt-10 md:min-h-16"
-            >
-              {nameComplete && (
-                <motion.div
-                  key={currentRoleIndex}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -16 }}
-                  transition={{ duration: 0.5, ease: 'easeInOut' }}
-                  className="text-xl font-medium text-blue-400 sm:text-2xl md:text-3xl lg:text-4xl"
-                >
-                  {roles[currentRoleIndex]}
-                </motion.div>
-              )}
-            </motion.div>
-
-            <div className="mt-12 sm:mt-14 md:mt-16">
-              <a
-                href="#projects"
-                className="inline-flex items-center gap-2 rounded-xl border border-divider bg-secondaryBg/60 px-6 py-3 text-textPrimary shadow-soft backdrop-blur transition-all hover:bg-secondaryBg/80 sm:px-8 sm:py-4 sm:text-lg"
+              {/* Looping role animation - elegant vertical slide + fade */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={nameComplete ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.7, ease: 'easeOut' }}
+                className="mt-6 min-h-16 sm:mt-8 sm:min-h-20 md:mt-10 lg:min-h-24"
               >
-                View Work <span aria-hidden>→</span>
-              </a>
+                {nameComplete && (
+                  <motion.div
+                    key={currentRoleIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    className="text-2xl font-semibold text-purple-400 sm:text-3xl md:text-4xl lg:text-4xl tracking-tight"
+                  >
+                    {roles[currentRoleIndex]}
+                  </motion.div>
+                )}
+              </motion.div>
+
+              {/* Subtle spacer and CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+                className="mt-10 flex flex-col gap-4 sm:mt-12 md:mt-14 lg:flex-row"
+              >
+                <a
+                  href="#projects"
+                  className="inline-flex items-center justify-center lg:justify-start gap-2 rounded-xl border border-divider bg-secondaryBg/60 px-6 py-3 text-textPrimary shadow-soft backdrop-blur transition-all hover:bg-secondaryBg/80 sm:px-8 sm:py-4 sm:text-lg"
+                >
+                  View Work <span aria-hidden>→</span>
+                </a>
+              </motion.div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+
+          {/* Right side: Profile Image - Circular with premium animation */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, x: 30 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: 'easeOut', delay: 0.15 }}
+            className="flex justify-center lg:justify-start"
+          >
+            <div className="relative w-full max-w-sm sm:max-w-md">
+              {/* Animated circular container with enhanced shadow */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2, delay: 0.3 }}
+                className="relative h-80 w-80 sm:h-96 sm:w-96 overflow-hidden rounded-full border border-divider/50 bg-gradient-to-br from-white/8 to-primaryBg/40 shadow-[0_20px_60px_-15px_rgba(167,139,250,0.3)]"
+              >
+                {/* Profile image with subtle zoom */}
+                <motion.img 
+                  src={profilePhoto} 
+                  alt="Aaditya Sangwan profile photo" 
+                  initial={{ scale: 1.05 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 1.2, delay: 0.2, ease: 'easeOut' }}
+                  className="h-full w-full object-cover object-top"
+                />
+                
+                {/* Subtle dark overlay for premium blend */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.4 }}
+                  className="absolute inset-0 bg-gradient-to-b from-transparent via-primaryBg/8 to-primaryBg/30"
+                />
+              </motion.div>
+              
+              {/* Enhanced animated subtle glow accent */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2, delay: 0.5 }}
+                className="pointer-events-none absolute -inset-8 rounded-full opacity-50 blur-3xl"
+                style={{ boxShadow: '0 0 100px 16px rgba(167,139,250,0.15)' }}
+              />
+
+              {/* Animated ring for premium feel */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                className="pointer-events-none absolute -inset-10 rounded-full border border-purple-500/15"
+              />
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )
