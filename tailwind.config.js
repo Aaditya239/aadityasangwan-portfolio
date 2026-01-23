@@ -44,7 +44,7 @@ export default {
       },
       textShadow: {
         glow: '0 0 30px rgba(59,130,246,0.3)'
-      }
+      },
       borderColor: {
         DEFAULT: '#1F2937'
       },
