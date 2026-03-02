@@ -13,6 +13,7 @@ const projects = [
       'Future-ready support for AI-based assistance',
     ],
     tags: ['Impact', 'Agriculture'],
+    link: '',
   },
   {
     title: 'Unsaid',
@@ -24,6 +25,7 @@ const projects = [
       'Designed to encourage openness and connection',
     ],
     tags: ['Wellness', 'Community'],
+    link: 'https://unsaid-client-six.vercel.app/',
   },
 ]
 
@@ -70,9 +72,16 @@ function ProjectBlock({ project, index }) {
 
       {/* Optional CTA or link hint */}
       <div className="mt-6 pt-6 border-t border-divider">
-        <a href="#" className="inline-flex items-center gap-2 text-sm text-accent hover:text-accentHover transition">
-          Learn more <span aria-hidden>→</span>
-        </a>
+        {project.link && (
+          <a 
+            href={project.link} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="inline-flex items-center gap-2 text-sm text-accent hover:text-accentHover transition"
+          >
+            Learn more <span aria-hidden>→</span>
+          </a>
+        )}
       </div>
     </motion.div>
   )
