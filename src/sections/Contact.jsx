@@ -161,11 +161,11 @@ export default function Contact() {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="https://github.com/" target="_blank" rel="noreferrer" className="btn-ghost">GitHub</a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="btn-ghost">LinkedIn</a>
+            <a href="https://github.com/Aaditya239" target="_blank" rel="noreferrer" className="btn-ghost">GitHub</a>
+            <a href="https://www.linkedin.com/in/aaditya-sangwan-2097a3315/" target="_blank" rel="noreferrer" className="btn-ghost">LinkedIn</a>
 
             {/* New minimal outline icons */}
-            <IconButton href="https://www.instagram.com/" label="Instagram">
+            <IconButton href="https://www.instagram.com/aadi0.020/" label="Instagram">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="3" y="3" width="18" height="18" rx="5" />
                 <path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
@@ -173,7 +173,7 @@ export default function Contact() {
               </svg>
             </IconButton>
 
-            <IconButton href="https://x.com/" label="Twitter / X">
+            <IconButton href="https://x.com/Aaditya1157968" label="Twitter / X">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M7 17L17 7" />
                 <path d="M7 7l10 10" />
